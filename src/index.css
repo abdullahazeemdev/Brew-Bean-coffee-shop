@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
@@ -12,25 +14,16 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background: #0f0b08;
-  color: #ffffff;
+  background: #0c0806;
+  color: #f5e6d3;
 }
 
-button,
-input {
-  font-family: inherit;
+h1,
+h2,
+h3 {
+  font-family: "DM Serif Display", serif;
 }
 
 button {
   cursor: pointer;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
