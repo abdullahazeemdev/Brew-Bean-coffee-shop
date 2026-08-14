@@ -9,7 +9,7 @@ function Navbar() {
 
 
 
-                <ul className="item-center gap-8 md:flex ">
+                <ul className="hidden item-center gap-8 md:flex ">
 
                     <li>
                         <a
