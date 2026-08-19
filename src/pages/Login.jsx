@@ -10,7 +10,7 @@ const Login = () => {
   })
 
   const handleChange = (value, field) => {
-    console.log(value);
+  // console.log(value)
 
     setForm((prev) => ({ ...prev, [field]: value }));
   };
