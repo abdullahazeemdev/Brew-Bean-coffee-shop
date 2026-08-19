@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer
       id="contact"
-      className="border-t border-white/10 bg-[#080503] px-6 pt-16 lg:px-10"
+      className=" border-white/10 bg-[#080503] px-6 pt-16 lg:px-10"
     >
       <div className="mx-auto max-w-7xl">
 
