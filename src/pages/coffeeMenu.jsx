@@ -1,14 +1,31 @@
-import React, { useState } from "react";
-import Cart from "./Cart";
-import coffeeData from "../data/coffees";
+import React, { useEffect,useState } from "react";
+import Cart from "../components/Cart";
+import axios from "axios";
+
 
 
 
 const CoffeeMenu = () => {
 
-    const [menu , setMenu] = useState(coffeeData);
+    const [menu , setMenu] = useState([]);
+
+    const getDeta = async() =>{
+        try{
+        const response = await axios.get("https://api.sampleapis.com/coffee/hot")
+        // console.log(response.data)
+        setMenu(response.data.slice(0,12)) 
+        }catch(error){
+            console.log(error)
+        }
+       
+        
+    }
+   
 
   
+    useEffect(() => {
+        getDeta();
+    },[])
       return (
         <section className="bg-[#0b0b0b] px-6 py-20 text-white md:px-12 lg:px-20">
             <div className="mx-auto max-w-7xl">
