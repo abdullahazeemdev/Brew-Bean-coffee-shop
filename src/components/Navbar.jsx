@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Navbar() {
     return (
         <nav className="absolute top-0 left-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
@@ -11,21 +13,27 @@ function Navbar() {
 
                 <ul className="hidden item-center gap-8 md:flex ">
 
-                    <li>
-                        <a
-                            href="#home"
-                            className="text-sm text-white/80 transition hover:text-[#C89B5C]">
-                            Home
-                        </a>
-                    </li>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            `text-sm transition hover:text-[#C89B5C] ${isActive ? "text-[#C89B5C] font-semibold" : "text-white/80"
+                            }`
+                        }
+                    >
+                        <li>Home</li>
+                    </NavLink>
 
-                    <li>
-                        <a
-                            href="#menu"
-                            className="text-sm text-white/80 transition hover:text-[#C89B5C]">
-                            Menu
-                        </a>
-                    </li>
+
+                    <NavLink
+                        to="/menu"
+                        className={({ isActive }) =>
+                            `text-sm transition hover:text-[#C89B5C] ${isActive ? "text-[#C89B5C] font-semibold" : "text-white/80"
+                            }`
+                        }
+                    >
+                        <li>Menu</li>
+                    </NavLink>
+
                     <li>
                         <a
                             href="#about"
@@ -34,10 +42,10 @@ function Navbar() {
                         </a>
                     </li>
                     <li>
-                        <a 
-                        href="#contact"
-                        className="text-sm text-white/80 transition hover:text-[#C89B5C]">
-                        Contact      
+                        <a
+                            href="#contact"
+                            className="text-sm text-white/80 transition hover:text-[#C89B5C]">
+                            Contact
                         </a>
                     </li>
 
