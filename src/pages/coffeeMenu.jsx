@@ -33,7 +33,7 @@ const CoffeeMenu = () => {
         <div>
 
 
-            <section className="bg-[#0b0b0b] px-6 py-6 text-white md:px-12 lg:px-20 ">
+            <section className="bg-[#0b0b0b] px-3 py-3 text-white md:px-12 lg:px-20 ">
                 <div className="mx-auto max-w-7xl">
 
 

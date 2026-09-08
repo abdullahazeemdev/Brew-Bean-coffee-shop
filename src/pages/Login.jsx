@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import Input from '../components/input';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import app from '../../env/Config';
+import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
 
-
+const auth = getAuth(app);
 const Login = () => {
 
   const [form, setForm] = useState({
@@ -10,19 +14,51 @@ const Login = () => {
   })
 
   const handleChange = (value, field) => {
-  // console.log(value)
+    // console.log(value)
 
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const navigate = useNavigate()
+
+  
+
+  const notify = (massage) => toast(massage);
 
 
   const loginHandler = (e) => {
+
     e.preventDefault();
-    console.log("login user", form);
 
+    const { email, password } = form;
 
-  }
+    signInWithEmailAndPassword(auth, email, password)
+
+      .then((userCredential) => {
+
+        const user = userCredential.user;
+
+        console.log(userCredential.user);
+        
+        const userName = user.displayName
+
+        toast.success(`Welcome back, ${userName}!`);
+
+        setTimeout(() => {
+
+          navigate('/')
+
+        }, 2000)
+
+      })
+      .catch((error) => {
+
+        console.log(error.code, error.message);
+
+        toast("Invalid email or password.");
+
+      });
+  };
 
 
 
@@ -35,7 +71,7 @@ const Login = () => {
         {/* logo */}
         <div className='mb-8 text-center'>
 
-          <h1 className='text-4xl font-bold text-{#d6a15d}'>
+          <h1 className='text-4xl font-bold text-[#d6a15d]'>
             Brew & Bean
           </h1>
 
@@ -102,9 +138,10 @@ const Login = () => {
           <div className="mt-7 border-t border-[#4a3023] pt-6 text-center">
             <p className="text-sm text-stone-400">
               Don't have an account?{" "}
-              <span className="cursor-pointer font-semibold text-[#d6a15d] hover:text-[#e9bd7d]">
-                Sign up
-              </span>
+              <Link to="/signup">
+                <span className="cursor-pointer font-semibold text-[#d6a15d] hover:text-[#e9bd7d]">
+                  Sign up
+                </span></Link>
             </p>
           </div>
 
@@ -112,6 +149,7 @@ const Login = () => {
         </div>
 
       </div>
+      <ToastContainer />
     </div>
   );
 };
