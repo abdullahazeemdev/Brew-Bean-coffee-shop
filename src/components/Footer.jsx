@@ -1,248 +1,200 @@
-import { useState } from "react";
-import Input from "../components/input";
-import { Link, useNavigate } from "react-router-dom";
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    updateProfile,
-} from "firebase/auth";
-import app from "../../env/Config.js";
-import { ToastContainer, toast } from "react-toastify";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const auth = getAuth(app);
+const Footer = () => {
+  return (
+    <footer className="bg-[#0c0a09] text-[#f5f0e8] border-t border-[#3a2c25]">
 
-const Signup = () => {
-    const [signupForm, setSignupForm] = useState({
-        name: "",
-        email: "",
-        age: "",
-        password: "",
-        confirmPassword: "",
-    });
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-6 py-14">
 
-    const notify = (message) => toast(message);
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
 
-    const handleChange = (value, field) => {
-        setSignupForm((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
-    };
+          {/* Brand */}
+          <div>
+            <h2 className="text-3xl font-bold text-[#d6a06a]">
+              Brew & Bean
+            </h2>
 
-    const navigate = useNavigate();
+            <p className="mt-4 text-[#a8a29e] leading-7">
+              Freshly brewed coffee, delicious flavors, and a cozy
+              experience made just for you.
+            </p>
 
-    const signupHandler = (e) => {
-        e.preventDefault();
+            {/* Social Icons */}
+            <div className="flex gap-4 mt-6">
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full
+                bg-[#1c1714] border border-[#3a2c25]
+                hover:bg-[#d6a06a] hover:text-black transition"
+              >
+                <i className="fa-brands fa-facebook-f"></i>
+              </a>
 
-        const {
-            name,
-            email,
-            age,
-            password,
-            confirmPassword,
-        } = signupForm;
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full
+                bg-[#1c1714] border border-[#3a2c25]
+                hover:bg-[#d6a06a] hover:text-black transition"
+              >
+                <i className="fa-brands fa-instagram"></i>
+              </a>
 
-        if (!name.trim()) {
-            notify("Please enter your name");
-            return;
-        }
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full
+                bg-[#1c1714] border border-[#3a2c25]
+                hover:bg-[#d6a06a] hover:text-black transition"
+              >
+                <i className="fa-brands fa-github"></i>
+              </a>
 
-        if (!age) {
-            notify("Please enter your age");
-            return;
-        }
+              <a
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full
+                bg-[#1c1714] border border-[#3a2c25]
+                hover:bg-[#d6a06a] hover:text-black transition"
+              >
+                <i className="fa-brands fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
 
-        if (Number(age) < 13 || Number(age) > 100) {
-            notify("Age must be between 13 and 100");
-            return;
-        }
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-5 text-[#d6a06a]">
+              Quick Links
+            </h3>
 
-        if (password !== confirmPassword) {
-            notify("Password does not match");
-            return;
-        }
+            <ul className="space-y-3 text-[#a8a29e]">
+              <li>
+                <Link
+                  to="/"
+                  className="hover:text-[#d6a06a] transition"
+                >
+                  Home
+                </Link>
+              </li>
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(async (userCredential) => {
-                const user = userCredential.user;
+              <li>
+                <Link
+                  to="/menu"
+                  className="hover:text-[#d6a06a] transition"
+                >
+                  Coffee Menu
+                </Link>
+              </li>
 
-                await updateProfile(user, {
-                    displayName: name,
-                });
+              <li>
+                <Link
+                  to="/about"
+                  className="hover:text-[#d6a06a] transition"
+                >
+                  About Us
+                </Link>
+              </li>
 
-                console.log("User:", user);
-                console.log("Age:", age);
+              <li>
+                <Link
+                  to="/contact"
+                  className="hover:text-[#d6a06a] transition"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-                notify("Account created successfully!");
+          {/* Customer Care */}
+          <div>
+            <h3 className="text-lg font-semibold mb-5 text-[#d6a06a]">
+              Customer Care
+            </h3>
 
-                setTimeout(() => {
-                    navigate("/login");
-                }, 1000);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+            <ul className="space-y-3 text-[#a8a29e]">
+              <li>
+                <a href="#" className="hover:text-[#d6a06a] transition">
+                  Privacy Policy
+                </a>
+              </li>
 
-                console.log(errorCode, errorMessage);
+              <li>
+                <a href="#" className="hover:text-[#d6a06a] transition">
+                  Terms & Conditions
+                </a>
+              </li>
 
-                if (error.code === "auth/email-already-in-use") {
-                    notify("This email is already registered");
-                } else if (error.code === "auth/weak-password") {
-                    notify("Password should be at least 6 characters");
-                } else if (error.code === "auth/invalid-email") {
-                    notify("Please enter a valid email");
-                } else {
-                    notify("Something went wrong. Please try again");
-                }
-            });
-    };
+              <li>
+                <a href="#" className="hover:text-[#d6a06a] transition">
+                  FAQs
+                </a>
+              </li>
 
-    return (
-        <div className="min-h-screen bg-[#1c120d] flex items-center justify-center px-3 sm:px-5 md:px-8 py-8 sm:py-10">
+              <li>
+                <a href="#" className="hover:text-[#d6a06a] transition">
+                  Support
+                </a>
+              </li>
+            </ul>
+          </div>
 
-            <div className="w-full max-w-md">
+          {/* Contact */}
+          <div>
+            <h3 className="text-lg font-semibold mb-5 text-[#d6a06a]">
+              Contact Us
+            </h3>
 
-                {/* Logo */}
-                <div className="mb-6 sm:mb-8 text-center">
+            <div className="space-y-4 text-[#a8a29e]">
 
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#d6a15d]">
-                        Brew & Bean
-                    </h1>
+              <p className="flex items-start gap-3">
+                <i className="fa-solid fa-location-dot text-[#d6a06a] mt-1"></i>
+                <span>Karachi, Pakistan</span>
+              </p>
 
-                    <p className="mt-2 text-xs sm:text-sm text-stone-400">
-                        Create your coffee account
-                    </p>
+              <p className="flex items-center gap-3">
+                <i className="fa-solid fa-phone text-[#d6a06a]"></i>
+                <span>+92 300 1234567</span>
+              </p>
 
-                </div>
+              <p className="flex items-center gap-3">
+                <i className="fa-solid fa-envelope text-[#d6a06a]"></i>
+                <span>hello@brewandbean.com</span>
+              </p>
 
-                {/* Signup Card */}
-                <div className="rounded-xl sm:rounded-2xl border border-[#4a3023] bg-[#281a13] p-5 sm:p-7 shadow-2xl">
-
-                    {/* Heading */}
-                    <div className="mb-5 sm:mb-6">
-
-                        <h2 className="text-xl sm:text-2xl font-semibold text-white">
-                            Create Account
-                        </h2>
-
-                        <p className="mt-1 text-xs sm:text-sm text-stone-400">
-                            Sign up to start your coffee journey
-                        </p>
-
-                    </div>
-
-                    {/* Form */}
-                    <form
-                        className="space-y-4 sm:space-y-5"
-                        onSubmit={signupHandler}
-                    >
-
-                        {/* Full Name */}
-                        <Input
-                            label="Full Name"
-                            field="name"
-                            type="text"
-                            placeholder="Enter your name"
-                            handler={handleChange}
-                        />
-
-                        {/* Email */}
-                        <Input
-                            field="email"
-                            label="Email Address"
-                            type="email"
-                            placeholder="you@example.com"
-                            handler={handleChange}
-                        />
-
-                        {/* Age */}
-                        <Input
-                            field="age"
-                            label="Age"
-                            type="number"
-                            placeholder="Enter your age"
-                            handler={handleChange}
-                        />
-
-                        {/* Password */}
-                        <Input
-                            label="Password"
-                            type="password"
-                            field="password"
-                            placeholder="Create a password"
-                            handler={handleChange}
-                        />
-
-                        {/* Confirm Password */}
-                        <Input
-                            label="Confirm Password"
-                            field="confirmPassword"
-                            type="password"
-                            placeholder="Confirm your password"
-                            handler={handleChange}
-                        />
-
-                        {/* Terms */}
-                        <div className="flex items-start gap-2 sm:gap-3 pt-1">
-
-                            <input
-                                type="checkbox"
-                                className="mt-1 h-4 w-4 shrink-0 accent-[#d6a15d]"
-                            />
-
-                            <p className="text-[11px] sm:text-xs leading-5 text-stone-400">
-
-                                I agree to the{" "}
-
-                                <span className="cursor-pointer text-[#d6a15d] hover:text-[#e9bd7d]">
-                                    Terms & Conditions
-                                </span>{" "}
-
-                                and{" "}
-
-                                <span className="cursor-pointer text-[#d6a15d] hover:text-[#e9bd7d]">
-                                    Privacy Policy
-                                </span>
-
-                            </p>
-
-                        </div>
-
-                        {/* Signup Button */}
-                        <button
-                            type="submit"
-                            className="w-full rounded-lg sm:rounded-xl bg-[#d6a15d] py-3 text-sm sm:text-base font-semibold text-[#1c120d] transition hover:bg-[#e9bd7d] active:scale-[0.98]"
-                        >
-                            Create Account
-                        </button>
-
-                    </form>
-
-                    {/* Login */}
-                    <div className="mt-6 sm:mt-7 border-t border-[#4a3023] pt-5 sm:pt-6 text-center">
-
-                        <p className="text-xs sm:text-sm text-stone-400">
-
-                            Already have an account?{" "}
-
-                            <Link to="/login">
-                                <span className="cursor-pointer font-semibold text-[#d6a15d] transition hover:text-[#e9bd7d]">
-                                    Login
-                                </span>
-                            </Link>
-
-                        </p>
-
-                    </div>
-
-                </div>
+              <p className="flex items-center gap-3">
+                <i className="fa-solid fa-clock text-[#d6a06a]"></i>
+                <span>Mon - Sun: 8AM - 11PM</span>
+              </p>
 
             </div>
-
-            <ToastContainer />
+          </div>
 
         </div>
-    );
+      </div>
+
+      {/* Bottom Footer */}
+      <div className="border-t border-[#3a2c25]">
+
+        <div className="max-w-7xl mx-auto px-6 py-5
+          flex flex-col md:flex-row
+          items-center justify-between gap-3">
+
+          <p className="text-sm text-[#78716c]">
+            © 2026 Brew & Bean. All rights reserved.
+          </p>
+
+          <p className="text-sm text-[#78716c]">
+            Made with <span className="text-red-500">♥</span> and coffee ☕
+          </p>
+
+        </div>
+
+      </div>
+
+    </footer>
+  );
 };
 
-export default Signup;
+export default Footer;
+
