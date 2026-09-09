@@ -48,32 +48,19 @@ function Hero() {
 
 
                     <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
-
-                        <Link to="/menu">
-                            <a
-                                className="w-full rounded-full bg-[#C89B5C] px-7 py-3 text-center font-medium text-[#0C0806] transition hover:bg-[#F5E6D3] sm:w-auto"
-                            >
-                                Explore Menu
-                            </a>
+                        <Link
+                            to="/menu"
+                            className="w-full rounded-full bg-[#C89B5C] px-7 py-3 text-center font-medium text-[#0C0806] transition hover:bg-[#F5E6D3] sm:w-auto"
+                        >
+                            Explore Menu
                         </Link>
 
-                        {/* <a
-                            href="#about"
+                        <Link
+                            to="/about"
                             className="w-full rounded-full border border-white/30 px-7 py-3 text-center font-medium text-white transition hover:border-[#C89B5C] hover:text-[#C89B5C] sm:w-auto"
                         >
                             Our Story
-                        </a> */}
-
-                          <Link to="/about">
-                            <a
-                                 className="w-full rounded-full border border-white/30 px-7 py-3 text-center font-medium text-white transition hover:border-[#C89B5C] hover:text-[#C89B5C] sm:w-auto"
-                            >
-                                Our Story
-                            </a>
                         </Link>
-
-
-
                     </div>
                 </div>
             </div>
