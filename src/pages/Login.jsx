@@ -37,8 +37,6 @@ const Login = () => {
       .then((userCredential) => {
 
         const user = userCredential.user;
-
-        console.log(userCredential.user);
         
         const userName = user.displayName
 
@@ -48,7 +46,7 @@ const Login = () => {
 
           navigate('/')
 
-        }, 2000)
+        }, 1500)
 
       })
       .catch((error) => {

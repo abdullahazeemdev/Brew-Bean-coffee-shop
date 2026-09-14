@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Input from "../components/input";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    updateProfile,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 import app from "../../env/Config.js";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -31,7 +28,7 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    const signupHandler = (e) => {
+    const signupHandler = async (e) => {
         e.preventDefault();
 
         const {
@@ -62,39 +59,48 @@ const Signup = () => {
             return;
         }
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(async (userCredential) => {
-                const user = userCredential.user;
+        try {
+            const { user } = await createUserWithEmailAndPassword(auth, email, password)
 
-                await updateProfile(user, {
-                    displayName: name,
-                });
-
-                console.log("User:", user);
-                console.log("Age:", age);
-
-                notify("Account created successfully!");
-
-                setTimeout(() => {
-                    navigate("/login");
-                }, 1000);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-
-                console.log(errorCode, errorMessage);
-
-                if (error.code === "auth/email-already-in-use") {
-                    notify("This email is already registered");
-                } else if (error.code === "auth/weak-password") {
-                    notify("Password should be at least 6 characters");
-                } else if (error.code === "auth/invalid-email") {
-                    notify("Please enter a valid email");
-                } else {
-                    notify("Something went wrong. Please try again");
-                }
+            await updateProfile(user, {
+                displayName: name,
             });
+
+            console.log("User:", user);
+            console.log("Age:", age);
+
+            notify("Account created successfully!");
+
+            try {
+                const docRef = await addDoc(collection(db, "users"), {
+                    first: "Ada",
+                    last: "Lovelace",
+                    born: 1815
+                });
+                console.log("Document written with ID: ", docRef.id);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+
+            setTimeout(() => {
+                navigate("/login");
+            }, 1000);
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            console.log(errorCode, errorMessage);
+
+            if (error.code === "auth/email-already-in-use") {
+                notify("This email is already registered");
+            } else if (error.code === "auth/weak-password") {
+                notify("Password should be at least 6 characters");
+            } else if (error.code === "auth/invalid-email") {
+                notify("Please enter a valid email");
+            } else {
+                notify("Something went wrong. Please try again");
+            }
+        };
     };
 
     return (
