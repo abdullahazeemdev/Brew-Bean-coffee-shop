@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Input from '../components/input';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from '../../env/env.js';
+import app from '../../Firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
