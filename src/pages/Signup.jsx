@@ -3,7 +3,7 @@ import Input from "../components/input";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword, updateProfile, } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import app from "../../env/Config.js";
+import app from "../../env/env.js";
 import { ToastContainer, toast } from "react-toastify";
 
 const auth = getAuth(app);

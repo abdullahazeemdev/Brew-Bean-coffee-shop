@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import {getAuth,onAuthStateChanged,signOut,} from "firebase/auth";
-import app from "../../env/Config";
+import app from "../../env/env.js";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
