@@ -1,5 +1,5 @@
 import "./App.css";
-import CoffeeMenu from "./pages/CoffeeMenu";
+import CoffeeMenu from "./pages/CoffeeMenu.jsx";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
