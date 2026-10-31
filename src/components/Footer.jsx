@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -24,7 +23,7 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex gap-4 mt-6">
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61581910271105"
                 className="w-10 h-10 flex items-center justify-center rounded-full
                 bg-[#1c1714] border border-[#3a2c25]
                 hover:bg-[#d6a06a] hover:text-black transition"
@@ -33,7 +32,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/abdullahazeemdev/"
                 className="w-10 h-10 flex items-center justify-center rounded-full
                 bg-[#1c1714] border border-[#3a2c25]
                 hover:bg-[#d6a06a] hover:text-black transition"
@@ -42,7 +41,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://github.com/abdullahazeemdev"
                 className="w-10 h-10 flex items-center justify-center rounded-full
                 bg-[#1c1714] border border-[#3a2c25]
                 hover:bg-[#d6a06a] hover:text-black transition"
@@ -51,7 +50,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/in/abdullahazeemdev/"
                 className="w-10 h-10 flex items-center justify-center rounded-full
                 bg-[#1c1714] border border-[#3a2c25]
                 hover:bg-[#d6a06a] hover:text-black transition"

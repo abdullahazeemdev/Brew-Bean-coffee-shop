@@ -1,5 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
-import {getAuth,onAuthStateChanged,signOut,} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../../Firebase/config";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
@@ -26,25 +26,24 @@ function Navbar() {
             showCancelButton: true,
             confirmButtonText: "Yes, Logout",
             cancelButtonText: "No",
-            confirmButtonColor: "#C89B5C",
-            cancelButtonColor: "#555",
-            background: "#0C0806",
-            color: "#F5E6D3",
+            confirmButtonColor: "#d6a15d",
+            cancelButtonColor: "#4a3023",
+            background: "#281a13",
+            color: "#ffffff",
         });
 
         if (result.isConfirmed) {
             try {
                 await signOut(auth);
-
                 setMenuOpen(false);
 
                 Swal.fire({
                     title: "Logged Out!",
                     text: "You have been successfully logged out.",
                     icon: "success",
-                    confirmButtonColor: "#C89B5C",
-                    background: "#0C0806",
-                    color: "#F5E6D3",
+                    confirmButtonColor: "#d6a15d",
+                    background: "#281a13",
+                    color: "#ffffff",
                 });
             } catch (error) {
                 console.log("Logout Error:", error);
@@ -57,17 +56,15 @@ function Navbar() {
     };
 
     const navLinkClass = ({ isActive }) =>
-        `block text-sm transition hover:text-[#C89B5C] ${
+        `block text-sm sm:text-base font-medium transition duration-200 hover:text-[#d6a15d] ${
             isActive
-                ? "text-[#C89B5C] font-semibold"
-                : "text-white/80"
+                ? "text-[#d6a15d] font-semibold"
+                : "text-stone-300"
         }`;
 
     return (
-        <nav className="absolute top-0 left-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
-
+        <nav className="absolute top-0 left-0 z-50 w-full border-b border-[#4a3023]/40 bg-[#1c120d]/80 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-
                 {/* Main Navbar */}
                 <div className="flex items-center justify-between py-4 sm:py-5">
 
@@ -75,89 +72,64 @@ function Navbar() {
                     <Link
                         to="/"
                         onClick={closeMenu}
-                        className="text-xl sm:text-2xl font-bold tracking-wide text-[#F5E6D3]"
+                        className="text-xl sm:text-2xl font-bold tracking-wide text-white"
                     >
-                        Brew<span className="text-[#C89B5C]">
-                            {" & Bean"}
-                        </span>
+                        Brew<span className="text-[#d6a15d]"> & Bean</span>
                     </Link>
 
                     {/* Desktop Menu */}
                     <ul className="hidden items-center gap-6 lg:gap-8 md:flex">
-
                         <li>
-                            <NavLink
-                                to="/"
-                                className={navLinkClass}
-                            >
+                            <NavLink to="/" className={navLinkClass}>
                                 Home
                             </NavLink>
                         </li>
-
                         <li>
-                            <NavLink
-                                to="/menu"
-                                className={navLinkClass}
-                            >
+                            <NavLink to="/menu" className={navLinkClass}>
                                 Menu
                             </NavLink>
                         </li>
-
                         <li>
-                            <NavLink
-                                to="/about"
-                                className={navLinkClass}
-                            >
+                            <NavLink to="/about" className={navLinkClass}>
                                 About
                             </NavLink>
                         </li>
-
                         <li>
-                            <NavLink
-                                to="/contact"
-                                className={navLinkClass}
-                            >
+                            <NavLink to="/contact" className={navLinkClass}>
                                 Contact
                             </NavLink>
                         </li>
-
                         <li>
-                            <NavLink
-                                to="/profile"
-                                className={navLinkClass}
-                            >
+                            <NavLink to="/profile" className={navLinkClass}>
                                 Profile
                             </NavLink>
                         </li>
-
                     </ul>
 
-                    {/* Desktop Button */}
+                    {/* Desktop Button / Auth */}
                     <div className="hidden md:block">
-
                         {user ? (
                             <button
                                 onClick={handleLogout}
-                                className="rounded-full border border-[#C89B5C] px-4 sm:px-5 py-2 text-sm text-[#F5E6D3] transition hover:bg-[#C89B5C] hover:text-[#0C0806]"
+                                className="rounded-xl border border-[#d6a15d] px-5 py-2 text-sm font-semibold text-[#d6a15d] transition-all hover:bg-[#d6a15d] hover:text-[#1c120d] active:scale-[0.98]"
                             >
                                 Logout
                             </button>
                         ) : (
                             <Link
                                 to="/menu"
-                                className="rounded-full border border-[#C89B5C] px-4 sm:px-5 py-2 text-sm text-[#F5E6D3] transition hover:bg-[#C89B5C] hover:text-[#0C0806]"
+                                className="rounded-xl bg-[#d6a15d] px-5 py-2.5 text-sm font-semibold text-[#1c120d] transition-all hover:bg-[#e9bd7d] active:scale-[0.98]"
                             >
                                 Order Now
                             </Link>
                         )}
-
                     </div>
 
-                    {/* Mobile hammburger */}
+                    {/* Mobile Hamburger Button */}
                     <button
                         type="button"
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#C89B5C]/50 text-[#F5E6D3] transition hover:bg-[#C89B5C] hover:text-[#0C0806] md:hidden"
+                        className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#4a3023] bg-[#281a13] text-[#d6a15d] transition hover:bg-[#342219] md:hidden"
                         aria-label="Toggle menu"
                     >
                         {menuOpen ? (
@@ -166,15 +138,12 @@ function Navbar() {
                             <i className="fa-solid fa-bars text-lg"></i>
                         )}
                     </button>
-
                 </div>
 
-                {/* Mobile Menu */}
+                {/* Mobile Menu Dropdown */}
                 {menuOpen && (
-                    <div className="border-t border-white/10 py-5 md:hidden">
-
-                        <ul className="flex flex-col gap-5">
-
+                    <div className="border-t border-[#4a3023] py-6 px-2 md:hidden bg-[#281a13] rounded-2xl mb-4 shadow-2xl animate-fadeIn">
+                        <ul className="flex flex-col gap-4 text-center">
                             <li>
                                 <NavLink
                                     to="/"
@@ -184,7 +153,6 @@ function Navbar() {
                                     Home
                                 </NavLink>
                             </li>
-
                             <li>
                                 <NavLink
                                     to="/menu"
@@ -194,7 +162,6 @@ function Navbar() {
                                     Menu
                                 </NavLink>
                             </li>
-
                             <li>
                                 <NavLink
                                     to="/about"
@@ -204,7 +171,6 @@ function Navbar() {
                                     About
                                 </NavLink>
                             </li>
-
                             <li>
                                 <NavLink
                                     to="/contact"
@@ -214,7 +180,6 @@ function Navbar() {
                                     Contact
                                 </NavLink>
                             </li>
-
                             <li>
                                 <NavLink
                                     to="/profile"
@@ -224,16 +189,14 @@ function Navbar() {
                                     Profile
                                 </NavLink>
                             </li>
-
                         </ul>
 
-                        {/* Mobile Button */}
-                        <div className="mt-6">
-
+                        {/* Mobile Action Button */}
+                        <div className="mt-6 px-4">
                             {user ? (
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full rounded-full border border-[#C89B5C] px-5 py-2.5 text-sm text-[#F5E6D3] transition hover:bg-[#C89B5C] hover:text-[#0C0806]"
+                                    className="w-full rounded-xl border border-[#d6a15d] py-3 text-sm font-semibold text-[#d6a15d] transition hover:bg-[#d6a15d] hover:text-[#1c120d]"
                                 >
                                     Logout
                                 </button>
@@ -241,19 +204,15 @@ function Navbar() {
                                 <Link
                                     to="/menu"
                                     onClick={closeMenu}
-                                    className="block w-full rounded-full border border-[#C89B5C] px-5 py-2.5 text-center text-sm text-[#F5E6D3] transition hover:bg-[#C89B5C] hover:text-[#0C0806]"
+                                    className="block w-full rounded-xl bg-[#d6a15d] py-3 text-center text-sm font-semibold text-[#1c120d] transition hover:bg-[#e9bd7d]"
                                 >
                                     Order Now
                                 </Link>
                             )}
-
                         </div>
-
                     </div>
                 )}
-
             </div>
-
         </nav>
     );
 }
