@@ -26,10 +26,10 @@ function Navbar() {
             showCancelButton: true,
             confirmButtonText: "Yes, Logout",
             cancelButtonText: "No",
-            confirmButtonColor: "#d6a15d",
-            cancelButtonColor: "#4a3023",
-            background: "#281a13",
-            color: "#ffffff",
+            confirmButtonColor: "#C89B5C",
+            cancelButtonColor: "#555",
+            background: "#0C0806",
+            color: "#F5E6D3",
         });
 
         if (result.isConfirmed) {
@@ -41,9 +41,9 @@ function Navbar() {
                     title: "Logged Out!",
                     text: "You have been successfully logged out.",
                     icon: "success",
-                    confirmButtonColor: "#d6a15d",
-                    background: "#281a13",
-                    color: "#ffffff",
+                    confirmButtonColor: "#C89B5C",
+                    background: "#0C0806",
+                    color: "#F5E6D3",
                 });
             } catch (error) {
                 console.log("Logout Error:", error);
@@ -56,10 +56,10 @@ function Navbar() {
     };
 
     const navLinkClass = ({ isActive }) =>
-        `block text-sm sm:text-base font-medium transition duration-200 hover:text-[#d6a15d] ${
+        `block text-sm sm:text-base font-medium transition-all duration-200 hover:text-[#C89B5C] ${
             isActive
-                ? "text-[#d6a15d] font-semibold"
-                : "text-stone-300"
+                ? "text-[#C89B5C] font-semibold"
+                : "text-white/80"
         }`;
 
     return (
@@ -72,9 +72,9 @@ function Navbar() {
                     <Link
                         to="/"
                         onClick={closeMenu}
-                        className="text-xl sm:text-2xl font-bold tracking-wide text-white"
+                        className="text-xl sm:text-2xl font-bold tracking-wide text-[#F5E6D3]"
                     >
-                        Brew<span className="text-[#d6a15d]"> & Bean</span>
+                        Brew<span className="text-[#C89B5C]"> & Bean</span>
                     </Link>
 
                     {/* Desktop Menu */}
@@ -106,19 +106,19 @@ function Navbar() {
                         </li>
                     </ul>
 
-                    {/* Desktop Button / Auth */}
+                    {/* Desktop Button */}
                     <div className="hidden md:block">
                         {user ? (
                             <button
                                 onClick={handleLogout}
-                                className="rounded-xl border border-[#d6a15d] px-5 py-2 text-sm font-semibold text-[#d6a15d] transition-all hover:bg-[#d6a15d] hover:text-[#1c120d] active:scale-[0.98]"
+                                className="rounded-xl border border-[#C89B5C] px-5 py-2 text-sm font-semibold text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806] active:scale-[0.98] shadow-md"
                             >
                                 Logout
                             </button>
                         ) : (
                             <Link
                                 to="/menu"
-                                className="rounded-xl bg-[#d6a15d] px-5 py-2.5 text-sm font-semibold text-[#1c120d] transition-all hover:bg-[#e9bd7d] active:scale-[0.98]"
+                                className="rounded-xl border border-[#C89B5C] px-5 py-2 text-sm font-semibold text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806] active:scale-[0.98] shadow-md"
                             >
                                 Order Now
                             </Link>
@@ -129,7 +129,7 @@ function Navbar() {
                     <button
                         type="button"
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#4a3023] bg-[#281a13] text-[#d6a15d] transition hover:bg-[#342219] md:hidden"
+                        className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#C89B5C]/50 text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806] md:hidden"
                         aria-label="Toggle menu"
                     >
                         {menuOpen ? (
@@ -138,11 +138,12 @@ function Navbar() {
                             <i className="fa-solid fa-bars text-lg"></i>
                         )}
                     </button>
+
                 </div>
 
                 {/* Mobile Menu Dropdown */}
                 {menuOpen && (
-                    <div className="border-t border-[#4a3023] py-6 px-2 md:hidden bg-[#281a13] rounded-2xl mb-4 shadow-2xl animate-fadeIn">
+                    <div className="border-t border-white/10 py-6 md:hidden animate-fadeIn">
                         <ul className="flex flex-col gap-4 text-center">
                             <li>
                                 <NavLink
@@ -192,11 +193,11 @@ function Navbar() {
                         </ul>
 
                         {/* Mobile Action Button */}
-                        <div className="mt-6 px-4">
+                        <div className="mt-6 px-2">
                             {user ? (
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full rounded-xl border border-[#d6a15d] py-3 text-sm font-semibold text-[#d6a15d] transition hover:bg-[#d6a15d] hover:text-[#1c120d]"
+                                    className="w-full rounded-xl border border-[#C89B5C] py-3 text-center text-sm font-semibold text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806]"
                                 >
                                     Logout
                                 </button>
@@ -204,7 +205,7 @@ function Navbar() {
                                 <Link
                                     to="/menu"
                                     onClick={closeMenu}
-                                    className="block w-full rounded-xl bg-[#d6a15d] py-3 text-center text-sm font-semibold text-[#1c120d] transition hover:bg-[#e9bd7d]"
+                                    className="block w-full rounded-xl border border-[#C89B5C] py-3 text-center text-sm font-semibold text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806]"
                                 >
                                     Order Now
                                 </Link>
