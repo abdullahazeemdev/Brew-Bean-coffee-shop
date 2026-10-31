@@ -63,7 +63,7 @@ function Navbar() {
         }`;
 
     return (
-        <nav className="absolute top-0 left-0 z-50 w-full border-b border-[#4a3023]/40 bg-[#1c120d]/80 backdrop-blur-md">
+        <nav className="absolute top-0 left-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
                 {/* Main Navbar */}
                 <div className="flex items-center justify-between py-4 sm:py-5">
