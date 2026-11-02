@@ -1,44 +1,43 @@
+
 import { useEffect, useState } from "react";
 import Cart from "../components/Cart";
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCoffeeData } from "../features/coffee/coffee";
 
 const CoffeeMenu = () => {
-  const [menu, setMenu] = useState([]);
   const [showOrder, setShowOrder] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const cart = useSelector((state) => state.coffee.cart || []);
+  // Redux Store
+  const { coffees, cart, loading, error } = useSelector(
+    (state) => state.coffee
+  );
 
+  // Fetch Coffee Data
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.sampleapis.com/coffee/hot",
-        );
+    dispatch(getCoffeeData());
+  }, [dispatch]);
 
-        setMenu(response.data.slice(0, 12));
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // Total Items
+  const totalItems = cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
-    getData();
-  }, []);
-
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-
+  // Total Price
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
-    0,
+    0
   );
 
   return (
     <div>
       <section className="min-h-screen bg-[#0b0b0b] px-3 py-3 text-white md:px-12 lg:px-20">
         <div className="mx-auto max-w-7xl">
+
           {/* Back Home */}
           <NavLink to={"/"}>
             <button className="group m-6 inline-flex items-center gap-2 rounded-full border border-gray-800 bg-[#161616] px-5 py-2.5 text-sm font-medium text-gray-300 transition-all duration-300 hover:border-amber-500 hover:bg-amber-500 hover:text-black">
@@ -65,15 +64,27 @@ const CoffeeMenu = () => {
           </div>
 
           {/* Coffee Cards */}
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {menu.map((cart) => (
-              <Cart
-                key={cart.id}
-                data={cart}
-                onOrder={() => setShowOrder(true)}
-              />
-            ))}
-          </div>
+
+          {loading ? (
+            <p className="py-10 text-center text-amber-500">
+              Loading Coffees...
+            </p>
+          ) : error ? (
+            <p className="py-10 text-center text-red-500">
+              {error}
+            </p>
+          ) : (
+            <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+              {coffees.map((coffee) => (
+                <Cart
+                  key={coffee.id}
+                  data={coffee}
+                  onOrder={() => setShowOrder(true)}
+                />
+              ))}
+            </div>
+          )}
+
         </div>
       </section>
 
@@ -85,6 +96,7 @@ const CoffeeMenu = () => {
             className="cursor-pointer rounded-2xl border border-amber-500/30 bg-[#171717]/95 p-4 shadow-2xl shadow-black/50 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-amber-500"
           >
             <div className="flex items-center justify-between gap-4">
+
               {/* Left */}
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-xl text-black">
@@ -110,12 +122,13 @@ const CoffeeMenu = () => {
 
                 <i className="fa-solid fa-arrow-right text-gray-400 transition-transform duration-300 group-hover:translate-x-1"></i>
               </div>
+
             </div>
           </div>
         </div>
       )}
 
-      {/* show 0rder button */}
+      {/* Show Order Button */}
       {cart.length > 0 && !showOrder && (
         <button
           onClick={() => setShowOrder(true)}
@@ -125,6 +138,7 @@ const CoffeeMenu = () => {
           View Order ({totalItems})
         </button>
       )}
+
     </div>
   );
 };

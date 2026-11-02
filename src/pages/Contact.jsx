@@ -1,21 +1,73 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Contact = () => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const subject = form.subject.value.trim();
+        const message = form.message.value.trim();
+
+        // Check empty fields
+        if (!name || !email || !subject || !message) {
+            Swal.fire({
+                title: "All Fields Required!",
+                text: "Please fill in all fields before sending your message.",
+                icon: "warning",
+                confirmButtonColor: "#C08B5C",
+                background: "#0C0806",
+                color: "#F5E6D3",
+            });
+            return;
+        }
+
+        // Email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            Swal.fire({
+                title: "Invalid Email!",
+                text: "Please enter a valid email address.",
+                icon: "error",
+                confirmButtonColor: "#C08B5C",
+                background: "#0C0806",
+                color: "#F5E6D3",
+            });
+            return;
+        }
+
+        // Success Alert
+        Swal.fire({
+            title: "Message Submitted!",
+            text: "Thank you for contacting Brew & Bean.",
+            icon: "success",
+            confirmButtonColor: "#C08B5C",
+            background: "#0C0806",
+            color: "#F5E6D3",
+        });
+
+        form.reset();
+    };
+
     return (
         <section className="min-h-screen bg-[#0d0d0d] px-5 py-10 text-white">
             <div className="mx-auto max-w-7xl">
 
                 {/* Back Home */}
-                <NavLink to="/">
-                    <button className="group inline-flex items-center gap-2 rounded-full border border-gray-800 bg-[#161616] px-5 py-2.5 text-sm font-medium text-gray-300 transition-all duration-300 hover:border-amber-500 hover:bg-amber-500 hover:text-black">
-                        <i className="fa-solid fa-arrow-left transition-transform duration-300 group-hover:-translate-x-1"></i>
-                        Back Home
-                    </button>
+                <NavLink
+                    to="/"
+                    className="group inline-flex items-center gap-2 rounded-full border border-gray-800 bg-[#161616] px-5 py-2.5 text-sm font-medium text-gray-300 transition-all duration-300 hover:border-amber-500 hover:bg-amber-500 hover:text-black"
+                >
+                    <i className="fa-solid fa-arrow-left transition-transform duration-300 group-hover:-translate-x-1"></i>
+                    Back Home
                 </NavLink>
 
-
-                {/* ================= HEADER ================= */}
+                {/* Header */}
                 <div className="mb-16 mt-10 text-center">
 
                     <p className="mb-3 text-sm font-semibold uppercase tracking-[4px] text-[#c08b5c]">
@@ -34,17 +86,14 @@ const Contact = () => {
 
                 </div>
 
-
                 <div className="grid gap-8 lg:grid-cols-2">
 
-
-
+                    {/* Contact Information */}
                     <div className="rounded-3xl border border-white/10 bg-[#151515] p-7 md:p-10">
 
-                        {/* Card Heading */}
                         <div className="mb-10">
 
-                            <span className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#c08b5c]/10 text-2xl text-[#c08b5c]transition-all duration-300 hover:bg-[#d19a6b] hover:shadow-lg hover:shadow-[#c08b5c]/20 cursor-pointer">
+                            <span className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#c08b5c]/10 text-2xl text-[#c08b5c] transition-all duration-300 hover:bg-[#d19a6b] hover:shadow-lg hover:shadow-[#c08b5c]/20 cursor-pointer">
                                 <i className="fa-solid fa-mug-hot"></i>
                             </span>
 
@@ -60,10 +109,8 @@ const Contact = () => {
 
                         </div>
 
-
                         {/* Contact Details */}
                         <div className="space-y-7">
-
 
                             {/* Location */}
                             <div className="group flex items-start gap-5">
@@ -86,7 +133,6 @@ const Contact = () => {
 
                             </div>
 
-
                             {/* Phone */}
                             <div className="group flex items-start gap-5">
 
@@ -106,7 +152,6 @@ const Contact = () => {
 
                             </div>
 
-
                             {/* Email */}
                             <div className="group flex items-start gap-5">
 
@@ -125,7 +170,6 @@ const Contact = () => {
                                 </div>
 
                             </div>
-
 
                             {/* Opening Hours */}
                             <div className="group flex items-start gap-5">
@@ -149,7 +193,6 @@ const Contact = () => {
                             </div>
 
                         </div>
-
 
                         {/* Social Media */}
                         <div className="mt-10 border-t border-white/10 pt-8">
@@ -194,7 +237,7 @@ const Contact = () => {
 
                     </div>
 
-
+                    {/* Contact Form */}
                     <div className="rounded-3xl border border-white/10 bg-[#151515] p-7 md:p-10">
 
                         <div className="mb-8">
@@ -214,9 +257,7 @@ const Contact = () => {
 
                         </div>
 
-
-                        <form className="space-y-6">
-
+                        <form onSubmit={handleSubmit} className="space-y-6">
 
                             {/* Name + Email */}
                             <div className="grid gap-6 md:grid-cols-2">
@@ -233,6 +274,8 @@ const Contact = () => {
 
                                         <input
                                             type="text"
+                                            name="name"
+                                            required
                                             placeholder="Enter your name"
                                             className="w-full rounded-xl border border-white/10 bg-[#101010] py-3.5 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-[#c08b5c] focus:ring-1 focus:ring-[#c08b5c]/30"
                                         />
@@ -240,7 +283,6 @@ const Contact = () => {
                                     </div>
 
                                 </div>
-
 
                                 <div>
 
@@ -254,6 +296,8 @@ const Contact = () => {
 
                                         <input
                                             type="email"
+                                            name="email"
+                                            required
                                             placeholder="Enter your email"
                                             className="w-full rounded-xl border border-white/10 bg-[#101010] py-3.5 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-[#c08b5c] focus:ring-1 focus:ring-[#c08b5c]/30"
                                         />
@@ -263,7 +307,6 @@ const Contact = () => {
                                 </div>
 
                             </div>
-
 
                             {/* Subject */}
                             <div>
@@ -278,6 +321,8 @@ const Contact = () => {
 
                                     <input
                                         type="text"
+                                        name="subject"
+                                        required
                                         placeholder="What is this about?"
                                         className="w-full rounded-xl border border-white/10 bg-[#101010] py-3.5 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-[#c08b5c] focus:ring-1 focus:ring-[#c08b5c]/30"
                                     />
@@ -285,7 +330,6 @@ const Contact = () => {
                                 </div>
 
                             </div>
-
 
                             {/* Message */}
                             <div>
@@ -299,7 +343,9 @@ const Contact = () => {
                                     <i className="fa-regular fa-message absolute left-4 top-4 text-gray-500"></i>
 
                                     <textarea
+                                        name="message"
                                         rows="7"
+                                        required
                                         placeholder="Write your message here..."
                                         className="w-full resize-none rounded-xl border border-white/10 bg-[#101010] py-3.5 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-[#c08b5c] focus:ring-1 focus:ring-[#c08b5c]/30"
                                     ></textarea>
@@ -308,17 +354,14 @@ const Contact = () => {
 
                             </div>
 
-
-                            {/* Button */}
+                            {/* Submit Button */}
                             <button
                                 type="submit"
                                 className="group flex w-full items-center justify-center gap-3 rounded-xl bg-[#c08b5c] px-6 py-4 text-sm font-semibold text-black transition-all duration-300 hover:bg-[#d19a6b] hover:shadow-lg hover:shadow-[#c08b5c]/20"
                             >
-
                                 Send Message
 
                                 <i className="fa-solid fa-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
-
                             </button>
 
                         </form>
@@ -327,7 +370,7 @@ const Contact = () => {
 
                 </div>
 
-
+                {/* Footer Text */}
                 <div className="mt-16 pb-5 text-center">
 
                     <div className="mx-auto mb-5 h-px max-w-xs bg-white/10"></div>
@@ -352,4 +395,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

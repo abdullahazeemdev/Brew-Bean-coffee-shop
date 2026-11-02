@@ -15,30 +15,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
-
         <Route path="/login" element={<Login />} />
-
         <Route path="/signup" element={<Signup />} />
 
-        <Route
-          path="/menu"
-          element={
-            <ProtectedRoute>
-              <CoffeeMenu />
-            </ProtectedRoute>
-          }
-        />
+        {/* Menu - Without Login */}
+        <Route path="/menu" element={<CoffeeMenu />} />
 
-        <Route
-          path="/about"
-          element={
-            <ProtectedRoute>
-              <About />
-            </ProtectedRoute>
-          }
-        />
+        {/* Protected Routes */}
+        <Route path="/about" element={<About />} />
 
         <Route
           path="/contact"
@@ -66,7 +52,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
       </Routes>
     </BrowserRouter>
   );

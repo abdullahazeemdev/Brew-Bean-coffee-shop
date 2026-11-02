@@ -1,3 +1,4 @@
+
 import { NavLink, Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../../Firebase/config";
@@ -65,6 +66,7 @@ function Navbar() {
     return (
         <nav className="absolute top-0 left-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+
                 {/* Main Navbar */}
                 <div className="flex items-center justify-between py-4 sm:py-5">
 
@@ -106,8 +108,8 @@ function Navbar() {
                         </li>
                     </ul>
 
-                    {/* Desktop Button */}
-                    <div className="hidden md:block">
+                    {/* Desktop Buttons */}
+                    <div className="hidden md:flex items-center gap-3">
                         {user ? (
                             <button
                                 onClick={handleLogout}
@@ -116,12 +118,21 @@ function Navbar() {
                                 Logout
                             </button>
                         ) : (
-                            <Link
-                                to="/menu"
-                                className="rounded-xl border border-[#C89B5C] px-5 py-2 text-sm font-semibold text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806] active:scale-[0.98] shadow-md"
-                            >
-                                Order Now
-                            </Link>
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="rounded-xl border border-white/30 px-5 py-2 text-sm font-semibold text-[#F5E6D3] transition-all hover:border-[#C89B5C] hover:text-[#C89B5C] active:scale-[0.98]"
+                                >
+                                    Login
+                                </Link>
+
+                                <Link
+                                    to="/menu"
+                                    className="rounded-xl border border-[#C89B5C] bg-[#C89B5C] px-5 py-2 text-sm font-semibold text-[#0C0806] transition-all hover:bg-transparent hover:text-[#F5E6D3] active:scale-[0.98] shadow-md"
+                                >
+                                    Order Now
+                                </Link>
+                            </>
                         )}
                     </div>
 
@@ -192,8 +203,8 @@ function Navbar() {
                             </li>
                         </ul>
 
-                        {/* Mobile Action Button */}
-                        <div className="mt-6 px-2">
+                        {/* Mobile Action Buttons */}
+                        <div className="mt-6 flex flex-col gap-3 px-2">
                             {user ? (
                                 <button
                                     onClick={handleLogout}
@@ -202,13 +213,23 @@ function Navbar() {
                                     Logout
                                 </button>
                             ) : (
-                                <Link
-                                    to="/menu"
-                                    onClick={closeMenu}
-                                    className="block w-full rounded-xl border border-[#C89B5C] py-3 text-center text-sm font-semibold text-[#F5E6D3] transition-all hover:bg-[#C89B5C] hover:text-[#0C0806]"
-                                >
-                                    Order Now
-                                </Link>
+                                <>
+                                    <Link
+                                        to="/login"
+                                        onClick={closeMenu}
+                                        className="block w-full rounded-xl border border-white/30 py-3 text-center text-sm font-semibold text-[#F5E6D3] transition-all hover:border-[#C89B5C] hover:text-[#C89B5C]"
+                                    >
+                                        Login
+                                    </Link>
+
+                                    <Link
+                                        to="/menu"
+                                        onClick={closeMenu}
+                                        className="block w-full rounded-xl border border-[#C89B5C] bg-[#C89B5C] py-3 text-center text-sm font-semibold text-[#0C0806] transition-all hover:bg-transparent hover:text-[#F5E6D3]"
+                                    >
+                                        Order Now
+                                    </Link>
+                                </>
                             )}
                         </div>
                     </div>
